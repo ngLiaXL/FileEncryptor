@@ -30,6 +30,8 @@
         </activity>
         <activity android:name=".manage.FileEditActivity">
         </activity>
+        <activity android:name=".manage.FileViewActivity">
+        </activity>
     </application>
 
 </manifest>

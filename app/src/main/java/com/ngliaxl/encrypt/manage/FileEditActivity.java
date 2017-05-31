@@ -12,8 +12,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ngliaxl.encrypt.R;
+import com.ngliaxl.encrypt.event.UpdateEvent;
 import com.ngliaxl.encrypt.util.DialogUtil;
 import com.ngliaxl.encrypt.util.FileUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 import java.io.IOException;
@@ -96,7 +99,10 @@ public class FileEditActivity extends AppCompatActivity {
             DialogUtil.showConfirmDialog(this, "", "确认删除?", "取消", "确认", new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    FileUtils.deleteFile(mCurrentPath);
+                    EventBus.getDefault().post(new UpdateEvent());
+                    Toast.makeText(FileEditActivity.this, "文件删除成功", Toast.LENGTH_LONG).show();
+                    finish();
                 }
             });
 

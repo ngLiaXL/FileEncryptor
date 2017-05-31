@@ -23,7 +23,6 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,27 +47,21 @@ public class MainActivity extends AppCompatActivity {
      * @param view
      */
     public void onClickFileMgr(View view) {
-        openFilePicker();
+        openFilePicker("file_mgr");
     }
 
-    private void openFilePicker() {
-        CompositeFilter filter = getFilter();
+    private void openFilePicker(String from) {
+        ArrayList<FileFilter> filters = new ArrayList<>();
+        filters.add(new HiddenFilter());
+        CompositeFilter filter = new CompositeFilter(filters);
+
         Intent intent = new Intent(this, FileManageActivity.class);
         intent.putExtra(FileManageActivity.ARG_FILTER, filter);
         intent.putExtra(FileManageActivity.ARG_CLOSEABLE, true);
+        intent.putExtra(FileManageActivity.ARG_FROM_PAGE, from);
 
         startActivity(intent);
     }
-
-
-
-
-    public CompositeFilter getFilter() {
-        ArrayList<FileFilter> filters = new ArrayList<>();
-        filters.add(new HiddenFilter());
-        return new CompositeFilter(filters);
-    }
-
 
 
     /**

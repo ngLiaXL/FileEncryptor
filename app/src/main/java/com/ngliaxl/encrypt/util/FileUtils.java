@@ -115,6 +115,43 @@ public class FileUtils {
         }
     }
 
+
+    /**
+     * delete file or directory
+     * <ul>
+     * <li>if path is null or empty, return true</li>
+     * <li>if path not exist, return true</li>
+     * <li>if path exist, delete recursion. return true</li>
+     * <ul>
+     *
+     * @param path
+     * @return
+     */
+    public static boolean deleteFile(String path) {
+        if (TextUtils.isEmpty(path)) {
+            return true;
+        }
+
+        File file = new File(path);
+        if (!file.exists()) {
+            return true;
+        }
+        if (file.isFile()) {
+            return file.delete();
+        }
+        if (!file.isDirectory()) {
+            return false;
+        }
+        for (File f : file.listFiles()) {
+            if (f.isFile()) {
+                f.delete();
+            } else if (f.isDirectory()) {
+                deleteFile(f.getAbsolutePath());
+            }
+        }
+        return file.delete();
+    }
+
     /**
      * get suffix of file from path
      *

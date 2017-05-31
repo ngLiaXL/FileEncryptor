@@ -12,12 +12,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.ngliaxl.encrypt.event.FileEncryptEvent;
 import com.ngliaxl.encrypt.manage.DirectoryFragment;
 import com.ngliaxl.encrypt.manage.FileCreateActivity;
 import com.ngliaxl.encrypt.manage.FileEditActivity;
 import com.ngliaxl.encrypt.manage.filter.CompositeFilter;
 import com.ngliaxl.encrypt.manage.filter.PatternFilter;
 import com.ngliaxl.encrypt.util.FileUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -29,6 +32,9 @@ import java.util.regex.Pattern;
 
 
 public class FileManageActivity extends AppCompatActivity implements DirectoryFragment.FileClickListener {
+
+    public static final String ARG_FROM_PAGE = "arg_from_page" ;
+
     public static final String ARG_START_PATH = "arg_start_path";
     public static final String ARG_CURRENT_PATH = "arg_current_path";
 
@@ -50,6 +56,8 @@ public class FileManageActivity extends AppCompatActivity implements DirectoryFr
     private Boolean mCloseable;
 
     private CompositeFilter mFilter;
+
+    private String mFromPage ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +110,10 @@ public class FileManageActivity extends AppCompatActivity implements DirectoryFr
             if (currentPath.startsWith(mStartPath)) {
                 mCurrentPath = currentPath;
             }
+        }
+
+        if(getIntent().hasExtra(ARG_FROM_PAGE)){
+            mFromPage = getIntent().getStringExtra(ARG_FROM_PAGE) ;
         }
     }
 
@@ -251,9 +263,20 @@ public class FileManageActivity extends AppCompatActivity implements DirectoryFr
 
 
         if (filePath.endsWith(".txt")) {
-            startActivity(new Intent(this, FileEditActivity.class).putExtra("extra_file_path",
-                    filePath)
-            );
+
+            // 文件管理
+            if("file_mgr".equals(mFromPage)){
+
+                startActivity(new Intent(this, FileEditActivity.class).putExtra("extra_file_path",
+                        filePath)
+                );
+            }
+
+            else if("file_encrypt".equals(mFromPage)){
+                EventBus.getDefault().post(new FileEncryptEvent(filePath));
+                finish();
+            }
+
         }
     }
 }
