@@ -31,8 +31,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="onClickFileVerify"
-        android:text="验证与签名"
+        android:text="文件完整性校验"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="16sp"/>
 
+    <Button
+        android:id="@+id/btn_sign"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClickFileVerify"
+        android:text="文件签名"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="16sp"/>
 </LinearLayout>
