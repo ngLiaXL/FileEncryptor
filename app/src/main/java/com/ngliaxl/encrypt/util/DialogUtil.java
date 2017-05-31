@@ -23,8 +23,8 @@ public class DialogUtil {
         editText.setHint(hintText);
         dialog.setPositiveButton(sureText, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                if(onClickListener != null)
-                onClickListener.onClick(editText);
+                if (onClickListener != null)
+                    onClickListener.onClick(editText);
             }
         });
 
@@ -35,5 +35,27 @@ public class DialogUtil {
 
         });
         dialog.show();
+    }
+
+    public static void showConfirmDialog(Context context, String title, String message, String left,
+                                         String right, final View.OnClickListener onClickListener) {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(context)
+                .setTitle(title)
+                .setMessage(message)
+                .setNegativeButton(left, new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .setPositiveButton(right, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (onClickListener != null)
+                            onClickListener.onClick(null);
+                    }
+                });
+        dialog.create().show();
     }
 }

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.ngliaxl.encrypt.R;
@@ -48,6 +49,11 @@ public class DirectoryAdapter extends RecyclerView.Adapter<DirectoryAdapter.Dire
     private Context mContext;
     private OnItemClickListener mOnItemClickListener;
 
+
+    public DirectoryAdapter(Context context) {
+        mContext = context;
+    }
+
     public DirectoryAdapter(Context context, List<File> files) {
         mContext = context;
         mFiles = files;
@@ -55,6 +61,12 @@ public class DirectoryAdapter extends RecyclerView.Adapter<DirectoryAdapter.Dire
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         mOnItemClickListener = listener;
+    }
+
+
+    public void setListData(List<File> files){
+        this.mFiles = files ;
+        notifyDataSetChanged();
     }
 
     @Override

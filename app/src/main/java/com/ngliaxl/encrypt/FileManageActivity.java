@@ -10,16 +10,13 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ngliaxl.encrypt.manage.DirectoryFragment;
 import com.ngliaxl.encrypt.manage.FileCreateActivity;
+import com.ngliaxl.encrypt.manage.FileEditActivity;
 import com.ngliaxl.encrypt.manage.filter.CompositeFilter;
 import com.ngliaxl.encrypt.manage.filter.PatternFilter;
-import com.ngliaxl.encrypt.util.DialogUtil;
 import com.ngliaxl.encrypt.util.FileUtils;
 
 import java.io.File;
@@ -242,15 +239,21 @@ public class FileManageActivity extends AppCompatActivity implements DirectoryFr
             addFragmentToBackStack(mCurrentPath);
             updateTitle();
         } else {
-            //setResultAndFinish(clickedFile.getPath());
-            Toast.makeText(this,"click file",Toast.LENGTH_LONG).show();
+            setResultAndFinish(clickedFile.getPath());
         }
     }
 
     private void setResultAndFinish(String filePath) {
-        Intent data = new Intent();
+        /*Intent data = new Intent();
         data.putExtra(RESULT_FILE_PATH, filePath);
         setResult(RESULT_OK, data);
-        finish();
+        finish();*/
+
+
+        if (filePath.endsWith(".txt")) {
+            startActivity(new Intent(this, FileEditActivity.class).putExtra("extra_file_path",
+                    filePath)
+            );
+        }
     }
 }

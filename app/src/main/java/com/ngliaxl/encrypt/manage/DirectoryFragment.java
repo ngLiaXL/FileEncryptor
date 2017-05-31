@@ -11,9 +11,14 @@ import android.view.ViewGroup;
 
 
 import com.ngliaxl.encrypt.R;
+import com.ngliaxl.encrypt.event.UpdateEvent;
 import com.ngliaxl.encrypt.manage.filter.CompositeFilter;
 import com.ngliaxl.encrypt.manage.widget.EmptyRecyclerView;
 import com.ngliaxl.encrypt.util.FileUtils;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 
@@ -37,17 +42,29 @@ public class DirectoryFragment extends Fragment {
     private DirectoryAdapter mDirectoryAdapter;
     private FileClickListener mFileClickListener;
 
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onUpdateListEvent(UpdateEvent event) {
+        mDirectoryAdapter.setListData(
+                FileUtils.getFileListByDirPath(mPath, mFilter));
+    }
+
+
+
+
     @SuppressWarnings("deprecation")
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         mFileClickListener = (FileClickListener) activity;
+        EventBus.getDefault().register(this);
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
         mFileClickListener = null;
+        EventBus.getDefault().unregister(this);
     }
 
     public static DirectoryFragment getInstance(

@@ -3,7 +3,7 @@
           package="com.ngliaxl.encrypt">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:name=".MainApp"
@@ -27,6 +27,8 @@
         <activity android:name=".FileManageActivity">
         </activity>
         <activity android:name=".manage.FileCreateActivity">
+        </activity>
+        <activity android:name=".manage.FileEditActivity">
         </activity>
     </application>
 
