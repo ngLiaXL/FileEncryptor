@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         if (ab != null) {
             ab.setTitle("文件加密");
             ab.setDisplayHomeAsUpEnabled(false);
-            ab.setSubtitle("xxxxx");
+            ab.setSubtitle("张元昊(13002617)");
         }
     }
 
@@ -74,14 +74,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * 文件验证和数字证书
+     * 文件验证
      *
      * @param view
      */
     public void onClickFileVerify(View view) {
         startActivity(new Intent(this, FileVerifyActivity.class));
     }
-
+    /**
+     * 数字证书
+     * @param view
+     */
+    public void onClickFileSign(View view) {
+        startActivity(new Intent(this, FileSignActivity.class));
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

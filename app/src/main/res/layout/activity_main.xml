@@ -39,7 +39,7 @@
         android:id="@+id/btn_sign"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="onClickFileVerify"
+        android:onClick="onClickFileSign"
         android:text="文件签名"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="16sp"/>

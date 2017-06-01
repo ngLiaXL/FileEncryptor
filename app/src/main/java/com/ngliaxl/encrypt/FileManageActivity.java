@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.ngliaxl.encrypt.event.FileEncryptEvent;
+import com.ngliaxl.encrypt.event.FileVerifyEvent;
 import com.ngliaxl.encrypt.manage.DirectoryFragment;
 import com.ngliaxl.encrypt.manage.FileCreateActivity;
 import com.ngliaxl.encrypt.manage.FileEditActivity;
@@ -266,14 +267,26 @@ public class FileManageActivity extends AppCompatActivity implements DirectoryFr
 
             // 文件管理
             if("file_mgr".equals(mFromPage)){
-
                 startActivity(new Intent(this, FileEditActivity.class).putExtra("extra_file_path",
                         filePath)
                 );
             }
 
+            // 加密解密
             else if("file_encrypt".equals(mFromPage)){
                 EventBus.getDefault().post(new FileEncryptEvent(filePath));
+                finish();
+            }
+
+            // MD5
+            else if("file_verify".equals(mFromPage)){
+                EventBus.getDefault().post(new FileVerifyEvent(filePath));
+                finish();
+            }
+
+            // 签名
+            else if("file_sign".equals(mFromPage)){
+                //EventBus.getDefault().post(new FileEncryptEvent(filePath));
                 finish();
             }
 
