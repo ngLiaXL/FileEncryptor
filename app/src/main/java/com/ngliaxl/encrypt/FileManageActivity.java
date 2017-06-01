@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.ngliaxl.encrypt.event.FileEncryptEvent;
+import com.ngliaxl.encrypt.event.FileSignEvent;
 import com.ngliaxl.encrypt.event.FileVerifyEvent;
 import com.ngliaxl.encrypt.manage.DirectoryFragment;
 import com.ngliaxl.encrypt.manage.FileCreateActivity;
@@ -286,7 +287,7 @@ public class FileManageActivity extends AppCompatActivity implements DirectoryFr
 
             // 签名
             else if("file_sign".equals(mFromPage)){
-                //EventBus.getDefault().post(new FileEncryptEvent(filePath));
+                EventBus.getDefault().post(new FileSignEvent(filePath));
                 finish();
             }
 
