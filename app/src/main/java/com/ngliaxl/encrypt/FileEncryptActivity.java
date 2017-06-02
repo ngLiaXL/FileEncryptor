@@ -66,7 +66,7 @@ public class FileEncryptActivity extends AppCompatActivity {
 
         ActionBar ab = getSupportActionBar();
         if (ab != null) {
-            ab.setTitle("加密解密");
+            ab.setTitle("文件加密解密");
             ab.setDisplayHomeAsUpEnabled(true);
         }
 

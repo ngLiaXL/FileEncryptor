@@ -22,9 +22,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 
-/**
- * Created by Dimorinny on 24.10.15.
- */
+
 public class DirectoryFragment extends Fragment {
     public interface FileClickListener {
         void onFileClicked(File clickedFile);

@@ -70,7 +70,7 @@ public class FileSignActivity extends AppCompatActivity {
 
         ActionBar ab = getSupportActionBar();
         if (ab != null) {
-            ab.setTitle("文件数字证书");
+            ab.setTitle("文件签名");
             ab.setDisplayHomeAsUpEnabled(true);
         }
 
@@ -133,7 +133,7 @@ public class FileSignActivity extends AppCompatActivity {
     }
 
 
-    public void onClickEncryptFile(View view) {
+    public void onClickDecrypeFile(View view) {
         if (mCurrentFilePath == null) {
             Toast.makeText(this, "请先选择文件", Toast.LENGTH_LONG).show();
             return;
@@ -158,10 +158,10 @@ public class FileSignActivity extends AppCompatActivity {
                     FileUtils.deleteFile(mCurrentFilePath);
                     FileUtils.write(currentFile, new StringBuffer(afterEncrypt));
 
-                    runOnUiThreadToast("签名成功");
+                    runOnUiThreadToast("解签成功");
 
                 } catch (Exception e) {
-                    runOnUiThreadToast("签名失败，请检查是否已经签名");
+                    runOnUiThreadToast("解签失败，请检查是否已经解签");
                 }finally {
                     mLoadingDialog.dismiss();
                 }
@@ -172,7 +172,7 @@ public class FileSignActivity extends AppCompatActivity {
     }
 
 
-    public void onClickDecrypeFile(View view) {
+    public void onClickEncryptFile(View view) {
 
         if (mCurrentFilePath == null) {
             Toast.makeText(this, "请先选择文件", Toast.LENGTH_LONG).show();
@@ -197,10 +197,10 @@ public class FileSignActivity extends AppCompatActivity {
                     FileUtils.deleteFile(currentFile.getAbsolutePath());
                     FileUtils.write(currentFile, new StringBuffer(new String(decryptByte, "UTF-8")));
 
-                    runOnUiThreadToast("解签成功");
+                    runOnUiThreadToast("签名成功");
 
                 } catch (Exception e) {
-                    runOnUiThreadToast("解签失败 : " + e.toString());
+                    runOnUiThreadToast("签名失败 : " + e.toString());
                 }finally {
                     mLoadingDialog.dismiss();
                 }

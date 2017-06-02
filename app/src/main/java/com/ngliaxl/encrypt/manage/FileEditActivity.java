@@ -84,17 +84,6 @@ public class FileEditActivity extends AppCompatActivity {
         if (menuItem.getItemId() == R.id.file_save) {
             String fileContent = mEtContent.getText().toString();
             editFile(fileContent);
-
-/*            DialogUtil.showEditDialog(this, "取消", "确认", "请输入文件名", new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    EditText editText = (EditText) v;
-                    String fileName = editText.getText().toString().trim();
-                    String fileContent = mEtContent.getText().toString();
-                    editFile(fileName, fileContent);
-
-                }
-            });*/
         } else if (menuItem.getItemId() == R.id.file_delete) {
             DialogUtil.showConfirmDialog(this, "", "确认删除?", "取消", "确认", new View.OnClickListener() {
                 @Override
